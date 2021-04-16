@@ -1,0 +1,7 @@
+﻿bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/.idea/
+FamilyManagement.sln.DotSettings.user
