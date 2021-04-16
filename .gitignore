@@ -3,5 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-/.idea/
-FamilyManagement.sln.DotSettings.user
+/.idea.FamilyManagement.iml
+/FamilyManagement.sln.DotSettings.user
