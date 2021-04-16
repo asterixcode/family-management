@@ -1,0 +1,51 @@
+﻿@page "/DetailsAdult/{Id:int}"
+@using Blazor.Data
+@using Blazor.Models
+
+@inject IFamilyService FamilyService
+@inject NavigationManager NavigationManager
+
+
+<div>
+    <button class="btn btn-outline-dark" @onclick="@Back">
+        Back
+    </button>
+    <br/>
+    <br/>
+    <h3>Details of @adultToShow.FirstName @adultToShow.LastName</h3>
+    <br/>
+    <h4>Personal Info:</h4>
+    <h6>ID: @adultToShow.Id</h6>
+    <h6>First Name: @adultToShow.FirstName</h6>
+    <h6>Last Name: @adultToShow.LastName</h6>
+    <h6>Hair Color: @adultToShow.HairColor</h6>
+    <h6>Eye Color: @adultToShow.EyeColor</h6>
+    <h6>Age: @adultToShow.Age</h6>
+    <h6>Weight: @adultToShow.Weight</h6>
+    <h6>Height: @adultToShow.Height</h6>
+    <h6>Sex: @adultToShow.Sex</h6>
+
+    <br/>
+    <h4>Job Info:</h4>
+    <h6>Job Title: @adultToShow.JobTitle.JobTitle</h6>
+    <h6>Salary: DKK @adultToShow.JobTitle.Salary</h6>
+</div>
+
+@code {
+    
+    [Parameter]
+    public int Id { get; set; }
+
+    private Adult adultToShow;
+
+    protected override async Task OnInitializedAsync()
+    {
+        adultToShow = FamilyService.GetAdultById(Id);
+    }
+
+    private void Back()
+    {
+        NavigationManager.NavigateTo("/ViewAdults");
+    }
+
+}
