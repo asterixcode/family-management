@@ -11,6 +11,8 @@ C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Microsoft.O
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Shared.dll
+C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\Shared.pdb
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.csprojAssemblyReference.cache
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.AssemblyInfoInputs.cache
@@ -27,3 +29,6 @@ C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.dll
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\ref\WebAPI.dll
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.pdb
 C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\obj\Debug\net5.0\WebAPI.genruntimeconfig.cache
+C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\families.json
+C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\adults.json
+C:\Users\lucas\Desktop\DNP1\FamilyManagement\WebAPI\bin\Debug\net5.0\users.json

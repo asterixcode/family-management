@@ -90,7 +90,7 @@ using Blazor.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 22 "C:\Users\lucas\Desktop\DNP1\FamilyManagement\Blazor\Shared\MainLayout.razor"
+#line 21 "C:\Users\lucas\Desktop\DNP1\FamilyManagement\Blazor\Shared\MainLayout.razor"
  
     [CascadingParameter] 
     protected Task<AuthenticationState> AuthStat { get; set; }

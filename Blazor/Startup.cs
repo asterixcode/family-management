@@ -1,9 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Blazor.Auth;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazor.Data;
+using Blazor.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Blazor
@@ -23,13 +30,29 @@ namespace Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<IFamilyService, FamilyServiceJSON>();
-            services.AddScoped<IUserService, UserServiceInMemory>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            //services.AddScoped<IDataApiService, DataApiService>();
+            //services.AddScoped<IUserService, UserService>();
+            
+            //http dependency injection for userService
+            services.AddHttpClient<IUserService, UserService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/user"); // URI which the API is available
+            });  
+        
+            // http dependency injection for dataService
+            services.AddHttpClient<IDataApiService, DataApiService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001"); // URI which the API is available
+            });   
+            
             
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", a => a.RequireAuthenticatedUser().RequireClaim("Role","ADMIN"));
+                options.AddPolicy("AdminOnly", 
+                    a => a
+                        .RequireAuthenticatedUser()
+                        .RequireClaim("Role","ADMIN"));
             });
         }
 

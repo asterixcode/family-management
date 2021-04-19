@@ -1,0 +1,63 @@
+﻿@page "/FamilyMy"
+@using global::Shared.Models
+
+
+<h3>My Family</h3>
+
+@if (myFamily == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="card-deck">
+        @foreach (var person in myFamily)
+        {
+            <div class="card m-3" style="min-width: 18rem; max-width: 30.5%;">
+                <div class="card-header">
+                    <h3>@person.FirstName @person.LastName</h3>
+                </div>
+                <img class="card-img-top imageThumbnail" src="@LoadImage(@person.Id, @person.Sex)"/>
+                <div class="card-footer text-center">
+                    <a href="#" class="btn btn-primary m-1">View</a>
+                    <a href="#" class="btn btn-primary m-1">Edit</a>
+                    <a href="#" class="btn btn-danger m-1">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+@code {
+    private IList<Person> myFamily;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadMyFamily);
+        
+        //LoadMyFamily();
+        //return base.OnInitializedAsync();
+    }
+
+    private void LoadMyFamily()
+    {
+        throw new NotImplementedException();
+    }
+
+    private string LoadImage(int id, string sex)
+    {
+        Random random = new Random();
+        if (sex == "M")
+        {
+            string path = $"img/male{random.Next(4) + 1}.png";
+            return path;
+        }
+        else
+        {
+            string path = $"img/female{random.Next(4) + 1}.png";
+        }
+        return "";
+    }
+
+}

@@ -4,4 +4,36 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Shared\Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Pages\Adults\**" />
+      <Compile Remove="Pages\Family\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Pages\Adults\**" />
+      <EmbeddedResource Remove="Pages\Family\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Pages\Adults\**" />
+      <None Remove="Pages\Family\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Pages\Adults\**" />
+      <Content Remove="Pages\Family\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\img" />
+    </ItemGroup>
+
 </Project>

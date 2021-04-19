@@ -84,7 +84,7 @@ using Blazor.Shared;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\lucas\Desktop\DNP1\FamilyManagement\Blazor\Pages\Login.razor"
-using Blazor.Data;
+using Blazor.Auth;
 
 #line default
 #line hidden

@@ -1,0 +1,72 @@
+﻿@page "/AddFamily"
+@using Blazor.Services
+@using global::Shared.Models
+
+@inject IUserService UserService
+@inject IDataApiService DataApiService
+@inject NavigationManager NavigationManager
+
+
+<AuthorizeView>
+    
+    <NotAuthorized>
+        <p>Please <a class="btn-primary" href="/Login">Login</a> to view this page</p>
+    </NotAuthorized>
+
+    <Authorized Context="Auth">
+        @* <h3>Add New Family @(() =>saveUser(@context.User.Identity.Name))</h3>        *@
+        <p style="display: none">Hello @saveUser(@Auth.User.Identity.Name)</p>
+        <EditForm Model="@newFamily" OnValidSubmit="@AddNewFamily" Context="Family">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            <div class="form-group"> Street name <br/>
+                <InputText @bind-Value="newFamily.StreetName"></InputText>
+            </div>
+            <div class="form-group"> House number: <br/>
+                <InputNumber rows="4" @bind-Value="newFamily.HouseNumber"></InputNumber>
+            </div>
+            <p class="actions">
+                <button class="btn btn-outline-dark" type="submit"> Add family</button>
+            </p>
+        </EditForm>
+    </Authorized>
+</AuthorizeView>
+
+<div style="color:red">@errorMessage</div>
+
+
+
+@code {
+    private string username;
+    private int userId;
+    private string errorMessage;
+    private Family newFamily = new Family();
+
+    private void getData()
+    {
+    }
+    
+    private string saveUser(string username)
+    {
+        this.username = username;
+        userId = UserService.GetUserId(this.username);
+        getData();
+        return this.username;
+    }
+
+    private void AddNewFamily()
+    {
+        errorMessage = "";
+        newFamily.UserId = userId;
+        try
+        {
+            DataApiService.AddFamilyAsync(newFamily);
+            NavigationManager.NavigateTo("/families");
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+        
+    }
+}

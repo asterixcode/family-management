@@ -1,0 +1,100 @@
+﻿@page "/AdultAdd"
+@using global::Shared.Models
+@using Blazor.Services
+
+@inject IDataApiService DataApiService
+@inject NavigationManager NavigationManager
+
+<h3>Add Adult</h3>
+
+<EditForm Model="@newAdult" OnValidSubmit="@AddNewAdult">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">
+        First name:<br/>
+        <InputText @bind-Value="newAdult.FirstName"/>
+    </div>
+    <div class="form-group">
+        Last name:<br/>
+        <InputText @bind-Value="newAdult.LastName"/>
+    </div>
+    <div class="form-group">
+        Hair color:<br/>
+        <InputText @bind-Value="newAdult.HairColor"/>
+    </div>
+    <div class="form-group">
+        Eye color:<br/>
+        <InputText @bind-Value="newAdult.EyeColor"/>
+    </div>
+    <div class="form-group">
+        Age:<br/>
+        <InputNumber @bind-Value="newAdult.Age"/>
+    </div>
+    <div class="form-group">
+        Weight (kg):<br/>
+        <InputNumber @bind-Value="newAdult.Weight"/>
+    </div>
+    <div class="form-group">
+        Height (cm):<br/>
+        <InputNumber @bind-Value="newAdult.Height"/>
+    </div>
+    <div class="form-group">
+        Sex:<br/>
+        <InputSelect @bind-Value="newAdult.Sex">
+            <option value="">Select sex</option>
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        Job Title:<br/>
+        <InputSelect @bind-Value="selectedJob">
+            <option value="">Select job</option>
+            @foreach (var job in allJobs)
+            {
+                string jobValue = job.JobTitle;
+                <option value="@jobValue">@job.JobTitle</option>
+            }
+        </InputSelect>
+    </div>
+
+
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+
+
+@code {
+    
+    private Adult newAdult = new Adult();
+    private IList<Job> allJobs;
+    private string selectedJob;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allJobs = await DataApiService.GetAllJobsAsync();
+    }
+
+    private void AddNewAdult()
+    {
+        AddSelectedJob();
+        DataApiService.AddAdultAsync(newAdult);
+        NavigationManager.NavigateTo("/AdultAll");
+    }
+
+    private void AddSelectedJob()
+    {
+        Job temp = new Job();
+        foreach (Job job in allJobs)
+        {
+            if (job.JobTitle.Equals(selectedJob))
+            {
+                temp = job;
+            }
+        }
+        newAdult.JobTitle = temp;
+    }
+    
+}

@@ -1,13 +1,14 @@
 ﻿@page "/Login"
-@using Blazor.Data
+@using Blazor.Auth
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
+@namespace Blazor.Pages
+
 <AuthorizeView>
-
+    
     <NotAuthorized>
-
         <div class="form-group">
             <label>Username</label>
             <input type="text" placeholder="username" @bind-value="username"/>
@@ -18,16 +19,15 @@
         </div>
         <div style="color:red">@errorMessage</div>
         <button @onclick="PerformLogin" class="btn-dark">LOGIN</button>
-
     </NotAuthorized>
-
+    
     <Authorized>
         <h5> Hello @context.User.Identity.Name! </h5>
         <button @onclick="PerformLogout" class="btn-dark">
             LOGOUT
         </button>
     </Authorized>
-
+    
 </AuthorizeView>
 
 @code {
