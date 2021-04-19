@@ -1,7 +1,8 @@
-bin/
-obj/
+*/bin/*
+*/obj/*
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-.idea*
-FamilyManagement.sln.DotSettings.user
+*.dll
+*/Blazor/obj/*
+.idea/*
