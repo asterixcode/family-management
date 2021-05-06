@@ -29,7 +29,7 @@ namespace Blazor.Services
             HttpResponseMessage response = await httpClient.GetAsync("/families");
            
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
             
             string responseContent = await response.Content.ReadAsStringAsync();
             List<Family> allFamilies = JsonSerializer.Deserialize<List<Family>>(responseContent, new JsonSerializerOptions
@@ -43,7 +43,7 @@ namespace Blazor.Services
         {
             HttpResponseMessage response = await httpClient.GetAsync($"/families/adults/{id}");
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
 
             string responseContent = await response.Content.ReadAsStringAsync();
             List<Family> familyById = JsonSerializer.Deserialize<List<Family>>(responseContent, new JsonSerializerOptions
@@ -60,24 +60,24 @@ namespace Blazor.Services
 
             HttpResponseMessage response = await httpClient.PostAsync("/families", content);
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         public async Task EditFamilyAsync(Family family)
         {
             string jsonFamily = JsonSerializer.Serialize(family);
-            StringContent content = new StringContent(jsonFamily, Encoding.UTF8, "application.json");
+            StringContent content = new StringContent(jsonFamily, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PatchAsync("/families", content);
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         public async Task DeleteFamilyAsync(int id)
         {
             HttpResponseMessage response = await httpClient.DeleteAsync("/families/{id}");
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         
@@ -90,7 +90,7 @@ namespace Blazor.Services
             HttpResponseMessage response = await httpClient.GetAsync("/adult");
            
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
             
             string responseContent = await response.Content.ReadAsStringAsync();
             List<Adult> allAdults = JsonSerializer.Deserialize<List<Adult>>(responseContent, new JsonSerializerOptions
@@ -105,7 +105,7 @@ namespace Blazor.Services
         {
             HttpResponseMessage response = await httpClient.GetAsync($"/adult/{id}");
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
 
             string responseContent = await response.Content.ReadAsStringAsync();
             Adult adult = JsonSerializer.Deserialize<Adult>(responseContent, new JsonSerializerOptions
@@ -123,18 +123,18 @@ namespace Blazor.Services
 
             HttpResponseMessage response = await httpClient.PostAsync("/adult", content);
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         // EDIT ADULT
         public async Task EditAdultAsync(Adult adult)
         {
             string jsonAdult = JsonSerializer.Serialize(adult);
-            StringContent content = new StringContent(jsonAdult, Encoding.UTF8, "application.json");
+            StringContent content = new StringContent(jsonAdult, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PatchAsync("/adult", content);
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         // DELETE ADULT
@@ -142,7 +142,7 @@ namespace Blazor.Services
         {
             HttpResponseMessage response = await httpClient.DeleteAsync("/adult/{id}");
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
 
         
@@ -152,7 +152,7 @@ namespace Blazor.Services
             HttpResponseMessage response = await httpClient.GetAsync("/jobs");
            
             if (!response.IsSuccessStatusCode)
-                throw new Exception($@"Error: {response.StatusCode}, {response.ReasonPhrase}");
+                throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
             
             string responseContent = await response.Content.ReadAsStringAsync();
             List<Job> jobs = JsonSerializer.Deserialize<List<Job>>(responseContent, new JsonSerializerOptions

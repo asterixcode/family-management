@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 
         Task<ActionResult<User>> RegisterUser([FromBody] User user);
         
-        Task<ActionResult<User>> EditUser([FromBody] User user);
-        Task<ActionResult<User>> DeleteUser([FromBody] int userId);
+        // Task<ActionResult<User>> EditUser([FromBody] User user);
+        // <ActionResult<User>> DeleteUser([FromBody] int userId);
     }
 }

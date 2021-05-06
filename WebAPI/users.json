@@ -1,7 +1,8 @@
-﻿[
-  {"UserId": 1,
-  "Username": "admin",
-  "Password": "admin",
+[
+  {
+    "UserId": 1,
+    "Username": "admin",
+    "Password": "admin",
     "Role": "ADMIN"
   },
   {

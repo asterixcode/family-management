@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> RegisterUser(User user)
+        public async Task<ActionResult<User>> RegisterUser([FromBody] User user)
         {
             try
             {
@@ -46,33 +46,6 @@ namespace WebAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
-        public async Task<ActionResult<User>> EditUser(User user)
-        {
-            try
-            {
-                await _userContextAdapter.EditUser(user);
-                return Ok(user);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        public async Task<ActionResult<User>> DeleteUser(int userId)
-        {
-            try
-            {
-                await _userContextAdapter.DeleteUser(userId);
-                return Ok(userId);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return StatusCode(500, e.Message);
-            }
-        }
+        
     }
 }

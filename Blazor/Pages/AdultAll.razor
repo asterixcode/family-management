@@ -68,7 +68,7 @@ else
 
                 <AuthorizeView Policy="AdminOnly">
                     <td>
-                        <button @onclick="@(() => DeleteAdult(adult.Id))">
+                        <button @onclick="@(() => DeleteAdultAsync(adult.Id))">
                             <i class="oi oi-trash" style="color:red"/>
                         </button>
                     </td>
@@ -100,6 +100,7 @@ else
     private int? filterById = null;
     private string filterByFirstName = "";
 
+    
     protected override async Task OnInitializedAsync()
     {
         allAdults = await DataApiService.GetAllAdultsAsync();
@@ -127,7 +128,7 @@ else
 
     private void FilterByFirstName(ChangeEventArgs changeEventArgs)
     {
-        filterByFirstName = null;
+        filterByFirstName = "";
         try
         {
             filterByFirstName = changeEventArgs.Value.ToString();
@@ -148,7 +149,7 @@ else
             ).ToList();
     }
 
-    private async Task DeleteAdult(int id)
+    private async Task DeleteAdultAsync(int id)
     {
         await DataApiService.DeleteAdultAsync(id);
 

@@ -37,7 +37,7 @@ namespace Blazor
             //http dependency injection for userService
             services.AddHttpClient<IUserService, UserService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/user"); // URI which the API is available
+                client.BaseAddress = new Uri("https://localhost:5001"); // URI which the API is available
             });  
         
             // http dependency injection for dataService

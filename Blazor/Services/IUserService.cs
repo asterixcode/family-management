@@ -8,8 +8,8 @@ namespace Blazor.Services
         Task<User> ValidateUserAsync(string username, string password);
 
         Task RegisterUser(User user);
-        void EditUser(User user);
-        void DeleteUser(int userId);
+        //void EditUser(User user);
+        //void DeleteUser(int userId);
         int GetUserId(string username);
     }
 }

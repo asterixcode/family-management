@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Shared.Models;
@@ -21,7 +22,7 @@ namespace Blazor.Services
             User newUser = new User();
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync($"?username={username}&password={password}");
+                HttpResponseMessage response = await httpClient.GetAsync($"/user?username={username}&password={password}");
                 if (!response.IsSuccessStatusCode)
                     throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
 
@@ -44,17 +45,23 @@ namespace Blazor.Services
 
         public async Task RegisterUser(User user)
         {
-            throw new System.NotImplementedException();
-        }
+            // string jsonUser = JsonSerializer.Serialize(user);
+            // StringContent content = new StringContent(jsonUser, Encoding.UTF8, "application/json")
+            // HttpResponseMessage response = await httpClient.PostAsync("/user", content);
+            // if (!response.IsSuccessStatusCode)
+            // {
+            //     throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
+            // }
+            
+            var jsonUser = new StringContent(
+                JsonSerializer.Serialize(user, typeof(User), new JsonSerializerOptions(JsonSerializerDefaults.Web)), Encoding.UTF8, "application/json");
 
-        public void EditUser(User user)
-        {
-            throw new System.NotImplementedException();
-        }
+            using var httpResponse = await httpClient.PostAsync("/user", jsonUser);
 
-        public void DeleteUser(int userId)
-        {
-            throw new System.NotImplementedException();
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception(httpResponse.Content.ReadAsStringAsync().Result);
+            }
         }
 
         public int GetUserId(string username)

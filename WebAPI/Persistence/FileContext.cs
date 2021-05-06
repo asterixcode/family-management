@@ -76,7 +76,14 @@ namespace WebAPI.Persistence
         public void RegisterUser(User user)
         {
             User first = null;
-            first = Users.FirstOrDefault(u => u.Username.Equals(user.Username));
+            try
+            {
+                first = Users.FirstOrDefault(u => u.Username.Equals(user.Username));
+            }
+            catch (Exception e)
+            {
+            }
+            
             if (first != null)
             {
                 throw new Exception("Username already register. Choose another username.");
