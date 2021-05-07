@@ -1,11 +1,12 @@
-﻿[
-  {"UserId": 1,
-  "Username": "admin",
-  "Password": "admin",
+[
+  {
+    "Id": 0,
+    "Username": "admin",
+    "Password": "admin",
     "Role": "ADMIN"
   },
   {
-    "UserId": 2,
+    "Id": 0,
     "Username": "lucas",
     "Password": "1234",
     "Role": "user"

@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Shared.Models;
+using Blazor.Models;
 
 namespace Blazor.Services
 {
     public class UserService : IUserService
     {
-        private HttpClient httpClient;
-        private User logged;
+        private readonly HttpClient _httpClient;
+        private User _logged;
 
         public UserService(HttpClient client)
         {
-            this.httpClient = client;
+            _httpClient = client;
         }
         
         public async Task<User> ValidateUserAsync(string username, string password)
         {
-            User newUser = new User();
+            User newUser;
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync($"?username={username}&password={password}");
+                HttpResponseMessage response = await _httpClient.GetAsync($"/user?username={username}&password={password}");
                 if (!response.IsSuccessStatusCode)
                     throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
 
@@ -36,30 +37,27 @@ namespace Blazor.Services
                 Console.WriteLine(e);
                 throw;
             }
-
-            Console.WriteLine("i got here with " + newUser.Username);
-            logged = newUser;
+            
+            _logged = newUser;
             return newUser;
         }
 
         public async Task RegisterUser(User user)
         {
-            throw new System.NotImplementedException();
-        }
+            var jsonUser = new StringContent(
+                JsonSerializer.Serialize(user, typeof(User), new JsonSerializerOptions(JsonSerializerDefaults.Web)), Encoding.UTF8, "application/json");
 
-        public void EditUser(User user)
-        {
-            throw new System.NotImplementedException();
-        }
+            using var httpResponse = await _httpClient.PostAsync("/user", jsonUser);
 
-        public void DeleteUser(int userId)
-        {
-            throw new System.NotImplementedException();
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception(httpResponse.Content.ReadAsStringAsync().Result);
+            }
         }
 
         public int GetUserId(string username)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

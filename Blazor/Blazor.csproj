@@ -5,10 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shared\Shared.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
     </ItemGroup>
 
@@ -30,10 +26,6 @@
     <ItemGroup>
       <Content Remove="Pages\Adults\**" />
       <Content Remove="Pages\Family\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\img" />
     </ItemGroup>
 
 </Project>

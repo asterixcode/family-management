@@ -1,8 +1,52 @@
 ﻿@page "/Register"
+@using Blazor.Services
+@using Blazor.Models
 
+@inject IUserService UserService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>Register</h3>
+<br/>
+
+<EditForm Model="@userToRegister" OnValidSubmit="@CreateUser">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="username" @bind-value="userToRegister.Username"/>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="password" @bind-value="userToRegister.Password"/>
+    </div>
+    <button class="btn-dark" type="submit"> REGISTER </button>
+    
+</EditForm>
+
+<br/>
+<div style="color:green">@successMessage</div>
+<div style="color:red">@errorMessage</div>
+
 
 @code {
+    private User userToRegister = new User();
+    private string errorMessage;
+    private string successMessage;
+
     
+    private async Task CreateUser()
+    {
+        errorMessage = "";
+        try
+        {
+            await UserService.RegisterUser(userToRegister);
+            successMessage = "Congrats! You have been register to the system. You can Login now.";
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+    }
+
 }

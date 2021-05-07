@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Blazor.Models;
 using Blazor.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using Shared.Models;
 
 namespace Blazor.Auth
 {
@@ -56,7 +56,7 @@ namespace Blazor.Auth
                 User user = Task.Run(() => userService.ValidateUserAsync(username, password)).Result;
                 identity = SetupClaimsForUser(user);
                 string serialisedData = JsonSerializer.Serialize(user);
-                jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
+                await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
                 cachedUser = user;
             }
             catch (Exception)
@@ -67,11 +67,11 @@ namespace Blazor.Auth
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public void Logout()
+        public async Task Logout()
         {
             cachedUser = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
-            jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
+            await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
 

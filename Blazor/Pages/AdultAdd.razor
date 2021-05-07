@@ -1,62 +1,62 @@
 ﻿@page "/AdultAdd"
-@using global::Shared.Models
 @using Blazor.Services
+@using Blazor.Models
 
 @inject IDataApiService DataApiService
 @inject NavigationManager NavigationManager
 
 <h3>Add Adult</h3>
 
-<EditForm Model="@newAdult" OnValidSubmit="@AddNewAdult">
+<EditForm Model="@_newAdult" OnValidSubmit="@AddNewAdult">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
     <div class="form-group">
         First name:<br/>
-        <InputText @bind-Value="newAdult.FirstName"/>
+        <InputText @bind-Value="_newAdult.FirstName"/>
     </div>
     <div class="form-group">
         Last name:<br/>
-        <InputText @bind-Value="newAdult.LastName"/>
+        <InputText @bind-Value="_newAdult.LastName"/>
     </div>
     <div class="form-group">
         Hair color:<br/>
-        <InputText @bind-Value="newAdult.HairColor"/>
+        <InputText @bind-Value="_newAdult.HairColor"/>
     </div>
     <div class="form-group">
         Eye color:<br/>
-        <InputText @bind-Value="newAdult.EyeColor"/>
+        <InputText @bind-Value="_newAdult.EyeColor"/>
     </div>
     <div class="form-group">
         Age:<br/>
-        <InputNumber @bind-Value="newAdult.Age"/>
+        <InputNumber @bind-Value="_newAdult.Age"/>
     </div>
     <div class="form-group">
         Weight (kg):<br/>
-        <InputNumber @bind-Value="newAdult.Weight"/>
+        <InputNumber @bind-Value="_newAdult.Weight"/>
     </div>
     <div class="form-group">
         Height (cm):<br/>
-        <InputNumber @bind-Value="newAdult.Height"/>
+        <InputNumber @bind-Value="_newAdult.Height"/>
     </div>
     <div class="form-group">
         Sex:<br/>
-        <InputSelect @bind-Value="newAdult.Sex">
+        <InputSelect @bind-Value="_newAdult.Sex">
             <option value="">Select sex</option>
             <option value="F">Female</option>
             <option value="M">Male</option>
         </InputSelect>
     </div>
-    <div class="form-group">
-        Job Title:<br/>
-        <InputSelect @bind-Value="selectedJob">
-            <option value="">Select job</option>
-            @foreach (var job in allJobs)
-            {
-                string jobValue = job.JobTitle;
-                <option value="@jobValue">@job.JobTitle</option>
-            }
-        </InputSelect>
-    </div>
+    @* <div class="form-group"> *@
+    @*     Job Title:<br/> *@
+    @*     <InputSelect @bind-Value="_selectedJob"> *@
+    @*         <option value="">Select job</option> *@
+    @*         @foreach (var job in _allJobs) *@
+    @*         { *@
+    @*             string jobValue = job.JobTitle; *@
+    @*             <option value="@jobValue">@job.JobTitle</option> *@
+    @*         } *@
+    @*     </InputSelect> *@
+    @* </div> *@
 
 
     <p class="actions">
@@ -67,34 +67,43 @@
 
 
 @code {
-    
-    private Adult newAdult = new Adult();
-    private IList<Job> allJobs;
-    private string selectedJob;
+
+    private Adult _newAdult = new Adult();
+    private IList<Job> _allJobs;
+    private string _selectedJob;
 
     protected override async Task OnInitializedAsync()
     {
-        allJobs = await DataApiService.GetAllJobsAsync();
+        try
+        {
+            _allJobs = await DataApiService.GetAllJobsAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 
     private void AddNewAdult()
     {
-        AddSelectedJob();
-        DataApiService.AddAdultAsync(newAdult);
+        //AddSelectedJob();
+        DataApiService.AddAdultAsync(_newAdult);
         NavigationManager.NavigateTo("/AdultAll");
     }
 
     private void AddSelectedJob()
     {
-        Job temp = new Job();
-        foreach (Job job in allJobs)
+        var temp = new Job();
+        foreach (var job in _allJobs)
         {
-            if (job.JobTitle.Equals(selectedJob))
+            if (job.JobTitle.Equals(_selectedJob))
             {
                 temp = job;
             }
         }
-        newAdult.JobTitle = temp;
+        _newAdult.JobTitle = temp;
     }
     
 }

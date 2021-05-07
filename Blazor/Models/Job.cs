@@ -1,4 +1,4 @@
-namespace Shared.Models
+namespace Blazor.Models
 {
     public class Job
     {
