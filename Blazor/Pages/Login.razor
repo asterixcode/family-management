@@ -61,7 +61,7 @@
         password = "";
         try
         {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
             NavigationManager.NavigateTo("/");
         }
         catch (Exception e)
