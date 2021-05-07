@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Shared.Models;
+using Blazor.Models;
 
 namespace Blazor.Services
 {
@@ -14,7 +14,7 @@ namespace Blazor.Services
 
         public UserService(HttpClient client)
         {
-            this.httpClient = client;
+            httpClient = client;
         }
         
         public async Task<User> ValidateUserAsync(string username, string password)
@@ -66,7 +66,7 @@ namespace Blazor.Services
 
         public int GetUserId(string username)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

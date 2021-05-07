@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Shared.Models {
+namespace WebAPI.Models {
 public class Child : Person {
     
     public List<Interest> Interests { get; set; }

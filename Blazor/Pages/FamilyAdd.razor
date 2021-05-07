@@ -1,6 +1,6 @@
 ﻿@page "/AddFamily"
 @using Blazor.Services
-@using global::Shared.Models
+@using Blazor.Models
 
 @inject IUserService UserService
 @inject IDataApiService DataApiService
@@ -15,7 +15,7 @@
 
     <Authorized Context="Auth">
         @* <h3>Add New Family @(() =>saveUser(@context.User.Identity.Name))</h3>        *@
-        <p style="display: none">Hello @saveUser(@Auth.User.Identity.Name)</p>
+        <p style="display: none">Hello @saveUser(Auth.User.Identity.Name)</p>
         <EditForm Model="@newFamily" OnValidSubmit="@AddNewFamily" Context="Family">
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>

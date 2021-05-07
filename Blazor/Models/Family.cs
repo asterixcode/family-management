@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Shared.Models {
+namespace Blazor.Models {
 public class Family {
     
     public int Id { get; set; }

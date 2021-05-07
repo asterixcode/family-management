@@ -1,5 +1,5 @@
 ﻿@page "/FamilyMy"
-@using global::Shared.Models
+@using Blazor.Models
 
 
 <h3>My Family</h3>
@@ -17,7 +17,7 @@ else
                 <div class="card-header">
                     <h3>@person.FirstName @person.LastName</h3>
                 </div>
-                <img class="card-img-top imageThumbnail" src="@LoadImage(@person.Id, @person.Sex)"/>
+                <img class="card-img-top imageThumbnail" src="@LoadImage(person.Id, person.Sex)"/>
                 <div class="card-footer text-center">
                     <a href="#" class="btn btn-primary m-1">View</a>
                     <a href="#" class="btn btn-primary m-1">Edit</a>

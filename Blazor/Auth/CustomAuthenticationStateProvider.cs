@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Blazor.Models;
 using Blazor.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using Shared.Models;
 
 namespace Blazor.Auth
 {

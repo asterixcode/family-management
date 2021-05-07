@@ -1,4 +1,4 @@
-namespace Shared.Models {
+namespace WebAPI.Models {
 public class Pet {
     public int Id { get; set; }
     public string Species { get; set; }

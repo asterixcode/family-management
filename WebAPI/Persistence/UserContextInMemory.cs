@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shared.Models;
+using WebAPI.Models;
 
 namespace WebAPI.Persistence
 {

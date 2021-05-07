@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {

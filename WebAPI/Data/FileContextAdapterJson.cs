@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Shared.Models;
+using WebAPI.Models;
 using WebAPI.Persistence;
 
 namespace WebAPI.Data

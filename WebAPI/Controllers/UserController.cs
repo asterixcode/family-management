@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
+using WebAPI.Models;
 using WebAPI.Data;
 
 namespace WebAPI.Controllers

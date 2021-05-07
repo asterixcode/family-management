@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Shared.Models;
-using Microsoft.AspNetCore.Components;
+using Blazor.Models;
 
 namespace Blazor.Services
 {
@@ -19,7 +17,7 @@ namespace Blazor.Services
         // (can't be used in a Blazor Component -> have to use the [inject] attribute in the property) 
         public DataApiService(HttpClient client)
         {
-            this.httpClient = client;
+            httpClient = client;
         }
 
 

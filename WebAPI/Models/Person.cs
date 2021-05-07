@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shared.Models {
+namespace WebAPI.Models {
 public class Person {
     
     [Required]

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Shared.Models;
+using Blazor.Models;
 
 namespace Blazor.Services
 {
