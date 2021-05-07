@@ -4,7 +4,7 @@ namespace WebAPI.Models
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
         
         [Required, MaxLength(32)]
         public string Username { get; set; }

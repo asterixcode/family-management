@@ -9,18 +9,15 @@ namespace WebAPI.Persistence
 {
     public class FileContext
     {
-        public IList<Family> Families { get; private set; }
         public IList<Adult> Adults { get; private set; }
         public IList<User> Users { get; private set; }
 
 
-        private readonly string familiesFile = "families.json";
         private readonly string adultsFile = "adults.json";
         private readonly string usersFile = "users.json";
 
         public FileContext()
         {
-            Families = File.Exists(familiesFile) ? ReadData<Family>(familiesFile) : new List<Family>();
             Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
             Users = File.Exists(usersFile) ? ReadData<User>(usersFile) : new List<User>();
         }
@@ -35,16 +32,6 @@ namespace WebAPI.Persistence
 
         public void SaveChanges()
         {
-            // storing families
-            string jsonFamilies = JsonSerializer.Serialize(Families, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-            using (StreamWriter outputFile = new StreamWriter(familiesFile, false))
-            {
-                outputFile.Write(jsonFamilies);
-            }
-
             // storing persons
             string jsonAdults = JsonSerializer.Serialize(Adults, new JsonSerializerOptions
             {
@@ -90,15 +77,15 @@ namespace WebAPI.Persistence
                 throw new Exception("Username already register. Choose another username.");
             }
             
-            int max = Users.Max(u => u.UserId);
-            user.UserId = (++max);
+            int max = Users.Max(u => u.Id);
+            user.Id = (++max);
             Users.Add(user);
             SaveChanges();
         }
 
         public void EditUser(User user)
         {
-            User toEdit = Users.FirstOrDefault(u => u.UserId == user.UserId);
+            User toEdit = Users.FirstOrDefault(u => u.Id == user.Id);
             toEdit.Username = user.Username;
             toEdit.Password = user.Password;
             SaveChanges();
@@ -106,7 +93,7 @@ namespace WebAPI.Persistence
 
         public void DeleteUser(int id)
         {
-            User toDelete = Users.FirstOrDefault(u => u.UserId == id);
+            User toDelete = Users.FirstOrDefault(u => u.Id == id);
             Users.Remove(toDelete);
             SaveChanges();
         }

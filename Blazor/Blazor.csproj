@@ -28,8 +28,4 @@
       <Content Remove="Pages\Family\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\img" />
-    </ItemGroup>
-
 </Project>

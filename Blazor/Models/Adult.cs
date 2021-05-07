@@ -6,6 +6,6 @@ public class Adult : Person {
     {
         JobTitle = new Job();
     }
-    
+
 }
 }

@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<ActionResult<Adult>> EditAdultAsync([FromBody] Adult adult)
         {
             try

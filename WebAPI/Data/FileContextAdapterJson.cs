@@ -9,12 +9,8 @@ namespace WebAPI.Data
 {
     public class FileContextAdapterJson : IFileContextAdapter
     {
-        private FileContext file;
-
-        public FileContextAdapterJson()
-        {
-            file = new FileContext();
-        }
+        private readonly FileContext file = new FileContext();
+            
 
         // adult
         public async Task<IList<Adult>> GetAllAdultsAsync()
@@ -62,14 +58,9 @@ namespace WebAPI.Data
         // job
         public async Task<IList<Job>> GetAllJobsAsync()
         {
-            IList<Job> jobs = new List<Job>();
-            IList<Adult> adults = GetAllAdultsAsync().Result;
-            
-            foreach (Adult adult in adults)
-            {
-                jobs.Add(adult.JobTitle);
-            }
-            return jobs;
+            var adults = GetAllAdultsAsync().Result;
+
+            return adults.Select(adult => adult.JobTitle).ToList();
         }
     }
 }
