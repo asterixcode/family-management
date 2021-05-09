@@ -7,7 +7,7 @@
 
 <h3>Add Adult</h3>
 
-<EditForm Model="@_newAdult" OnValidSubmit="@AddNewAdult">
+<EditForm Model="@_newAdult" OnValidSubmit="@AddNewAdultAsync">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
     <div class="form-group">
@@ -48,14 +48,12 @@
     </div>
     <div class="form-group">
         Job Title:<br/>
-        <InputSelect @bind-Value="_selectedJob">
-            <option value="">Select job</option>
-            @foreach (var job in _allJobs)
-            {
-                string jobValue = job.JobTitle;
-                <option value="@jobValue">@job.JobTitle</option>
-            }
-        </InputSelect>
+        <InputText @bind-Value="_jobName"/>
+    </div>
+
+    <div class="form-group">
+        Salary:<br/>
+        <InputNumber @bind-Value="_salary"/>
     </div>
 
 
@@ -69,41 +67,25 @@
 @code {
 
     private Adult _newAdult = new Adult();
-    private IList<Job> _allJobs = new List<Job>();
-    private string _selectedJob;
+    private string _jobName;
+    private int _salary;
+    
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            _allJobs = await DataApiService.GetAllJobsAsync();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        
-    }
-
-    private void AddNewAdult()
+    private async Task AddNewAdultAsync()
     {
         AddSelectedJob();
-        DataApiService.AddAdultAsync(_newAdult);
+        await DataApiService.AddAdultAsync(_newAdult);
         NavigationManager.NavigateTo("/AdultAll");
     }
 
     private void AddSelectedJob()
     {
-        var temp = new Job();
-        
-        foreach (var job in _allJobs)
+        var temp = new Job
         {
-            if (job.JobTitle.Equals(_selectedJob))
-            {
-                temp = job;
-            }
-        }
+            JobTitle = _jobName,
+            Salary = _salary
+        };
+        
         _newAdult.JobTitle = temp;
     }
     

@@ -81,12 +81,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("{id:int}")]
         public async Task<ActionResult> DeleteAdultAsync([FromRoute] int id)
         {
             try
             {
                 await _adultRepo.DeleteAdultAsync(id);
-                return Ok(id);
+                return Ok();
             }
             catch (Exception e)
             {
