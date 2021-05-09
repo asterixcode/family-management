@@ -42,7 +42,7 @@ namespace Blazor.Services
             return newUser;
         }
 
-        public async Task RegisterUser(User user)
+        public async Task RegisterUserAsync(User user)
         {
             var jsonUser = new StringContent(
                 JsonSerializer.Serialize(user, typeof(User), new JsonSerializerOptions(JsonSerializerDefaults.Web)), Encoding.UTF8, "application/json");
@@ -54,10 +54,6 @@ namespace Blazor.Services
                 throw new Exception(httpResponse.Content.ReadAsStringAsync().Result);
             }
         }
-
-        public int GetUserId(string username)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

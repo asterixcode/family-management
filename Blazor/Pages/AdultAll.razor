@@ -95,15 +95,16 @@ else
 @code {
     
     private IList<Adult> allAdults = new List<Adult>();
-    private IList<Adult> adultsToShow = new List<Adult>();
+    private IList<Adult> adultsToShow;
 
-    private int? filterById;
+    private int? filterById = null;
     private string filterByFirstName = "";
 
     
     protected override async Task OnInitializedAsync()
     {
         allAdults = await DataApiService.GetAllAdultsAsync();
+        adultsToShow = allAdults;
         ExecuteFilter();
     }
 
@@ -151,9 +152,9 @@ else
 
     private async Task DeleteAdultAsync(int id)
     {
+        //Adult toDelete = allAdults.First(a => a.Id == id);
         await DataApiService.DeleteAdultAsync(id);
 
-        allAdults = await DataApiService.GetAllAdultsAsync();
         ExecuteFilter();
     }
     

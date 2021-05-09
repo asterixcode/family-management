@@ -57,13 +57,6 @@ namespace Blazor.Services
         // ADD ADULT
         public async Task AddAdultAsync(Adult adult)
         {
-            // string jsonAdult = JsonSerializer.Serialize(adult);
-            // StringContent content = new StringContent(jsonAdult, Encoding.UTF8, "application/json");
-            //
-            // HttpResponseMessage response = await httpClient.PostAsync("/adult", content);
-            // if (!response.IsSuccessStatusCode)
-            //     throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
-            
             var jsonAdult = new StringContent(
                 JsonSerializer.Serialize(adult, typeof(Adult), new JsonSerializerOptions(JsonSerializerDefaults.Web)), Encoding.UTF8, "application/json");
 
@@ -90,7 +83,7 @@ namespace Blazor.Services
         // DELETE ADULT
         public async Task DeleteAdultAsync(int id)
         {
-            HttpResponseMessage response = await _httpClient.DeleteAsync("/adult/{id}");
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"/adult/{id}");
             if (!response.IsSuccessStatusCode)
                 throw new Exception($"Error: {response.StatusCode}, {response.ReasonPhrase}");
         }
