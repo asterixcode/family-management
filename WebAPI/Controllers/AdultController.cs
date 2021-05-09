@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using WebAPI.Data;
+using WebAPI.Models;
+using WebAPI.Repo;
 
 namespace WebAPI.Controllers
 {
@@ -11,11 +11,11 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class AdultController : ControllerBase, IAdultController
     {
-        private readonly IFileContextAdapter _fileContextAdapter;
+        private readonly IAdultRepo _adultRepo;
 
-        public AdultController(IFileContextAdapter fileContextAdapter)
+        public AdultController(IAdultRepo adultRepo)
         {
-            _fileContextAdapter = fileContextAdapter;
+            _adultRepo = adultRepo;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IList<Adult> adults = await _fileContextAdapter.GetAllAdultsAsync();
+                IList<Adult> adults = await _adultRepo.GetAllAdultsAsync();
                 return Ok(adults);
             }
             catch (Exception e)
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                Adult adult = await _fileContextAdapter.GetAdultByIdAsync(id);
+                Adult adult = await _adultRepo.GetAdultByIdAsync(id);
                 return Ok(adult);
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                await _fileContextAdapter.AddAdultAsync(adult);
+                await _adultRepo.AddAdultAsync(adult);
                 return Ok(adult);
             }
             catch (Exception e)
@@ -65,12 +65,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<ActionResult<Adult>> EditAdultAsync([FromBody] Adult adult)
         {
             try
             {
-                await _fileContextAdapter.EditAdultAsync(adult);
+                await _adultRepo.EditAdultAsync(adult);
                 return Ok(adult);
             }
             catch (Exception e)
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                await _fileContextAdapter.DeleteAdultAsync(id);
+                await _adultRepo.DeleteAdultAsync(id);
                 return Ok(id);
             }
             catch (Exception e)

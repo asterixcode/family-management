@@ -1,4 +1,4 @@
-namespace Shared.Models {
+namespace Blazor.Models {
 public class Adult : Person {
     public Job JobTitle { get; set; }
 
@@ -6,6 +6,6 @@ public class Adult : Person {
     {
         JobTitle = new Job();
     }
-    
+
 }
 }

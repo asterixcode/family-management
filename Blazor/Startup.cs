@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Blazor.Auth;
+using Blazor.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazor.Services;
-using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Blazor
 {
@@ -37,7 +32,7 @@ namespace Blazor
             //http dependency injection for userService
             services.AddHttpClient<IUserService, UserService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/user"); // URI which the API is available
+                client.BaseAddress = new Uri("https://localhost:5001"); // URI which the API is available
             });  
         
             // http dependency injection for dataService

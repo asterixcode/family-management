@@ -7,8 +7,10 @@
 @namespace Blazor.Pages
 
 <AuthorizeView>
-    
     <NotAuthorized>
+        <h3>Login</h3>
+        <br/>
+        
         <div class="form-group">
             <label>Username</label>
             <input type="text" placeholder="username" @bind-value="username"/>
@@ -17,8 +19,8 @@
             <label>Password</label>
             <input type="password" placeholder="password" @bind-value="password"/>
         </div>
-        <div style="color:red">@errorMessage</div>
         <button @onclick="PerformLogin" class="btn-dark">LOGIN</button>
+        <div style="color:red">@errorMessage</div>
     </NotAuthorized>
     
     <Authorized>
@@ -27,8 +29,9 @@
             LOGOUT
         </button>
     </Authorized>
-    
 </AuthorizeView>
+
+
 
 @code {
     private string username;
@@ -58,7 +61,7 @@
         password = "";
         try
         {
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
             NavigationManager.NavigateTo("/");
         }
         catch (Exception e)

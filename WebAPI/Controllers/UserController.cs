@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using WebAPI.Data;
+using WebAPI.Models;
+using WebAPI.Repo;
 
 namespace WebAPI.Controllers
 {
@@ -10,11 +10,11 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase, IUserController
     {
-        private readonly IUserContextAdapter _userContextAdapter;
+        private readonly IUserRepo _userRepository;
 
-        public UserController(IUserContextAdapter userContextAdapter)
+        public UserController(IUserRepo userRepository)
         {
-            this._userContextAdapter = userContextAdapter;
+            this._userRepository = userRepository;
         }
 
         [HttpGet]
@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                User validUser = await _userContextAdapter.ValidateUserAsync(username, password);
+                User validUser = await _userRepository.ValidateUserAsync(username, password);
                 return Ok(validUser);
             }
             catch (Exception e)
@@ -33,11 +33,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> RegisterUser(User user)
+        public async Task<ActionResult<User>> RegisterUserAsync([FromBody] User user)
         {
             try
             {
-                await _userContextAdapter.RegisterUser(user);
+                await _userRepository.RegisterUserAsync(user);
                 return Ok(user);
             }
             catch (Exception e)
@@ -46,33 +46,6 @@ namespace WebAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
-        public async Task<ActionResult<User>> EditUser(User user)
-        {
-            try
-            {
-                await _userContextAdapter.EditUser(user);
-                return Ok(user);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        public async Task<ActionResult<User>> DeleteUser(int userId)
-        {
-            try
-            {
-                await _userContextAdapter.DeleteUser(userId);
-                return Ok(userId);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return StatusCode(500, e.Message);
-            }
-        }
+        
     }
 }

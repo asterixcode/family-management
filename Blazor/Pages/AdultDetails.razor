@@ -1,6 +1,6 @@
 ﻿@page "/AdultDetails/{Id:int}"
-@using global::Shared.Models
 @using Blazor.Services
+@using Blazor.Models
 
 @inject IDataApiService DataApiService
 @inject NavigationManager NavigationManager
@@ -36,7 +36,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    private Adult adultToShow;
+    private Adult adultToShow = new Adult();
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,6 +1,6 @@
 ﻿@page "/AdultAll"
-@using global::Shared.Models
 @using Blazor.Services
+@using Blazor.Models
 
 @inject IDataApiService DataApiService
 @inject NavigationManager NavigationManager
@@ -29,11 +29,11 @@ else if (!allAdults.Any())
 else
 {
     <p>
-        Filter by ID: <input type="number" @oninput="@((arg) => FilterById(arg))" style="width: 50px"/>
+        Filter by ID: <input type="number" @oninput="@(arg => FilterById(arg))" style="width: 50px"/>
     </p>
     <p>
         Filter by First Name:
-        <input type="text" @oninput="@((arg) => FilterByFirstName(arg))" style="width:120px"/>
+        <input type="text" @oninput="@(arg => FilterByFirstName(arg))" style="width:120px"/>
     </p>
 
     <h3>List of Adults</h3>
@@ -68,7 +68,7 @@ else
 
                 <AuthorizeView Policy="AdminOnly">
                     <td>
-                        <button @onclick="@(() => DeleteAdult(adult.Id))">
+                        <button @onclick="@(() => DeleteAdultAsync(adult.Id))">
                             <i class="oi oi-trash" style="color:red"/>
                         </button>
                     </td>
@@ -94,12 +94,13 @@ else
 
 @code {
     
-    private IList<Adult> allAdults;
-    private IList<Adult> adultsToShow;
+    private IList<Adult> allAdults = new List<Adult>();
+    private IList<Adult> adultsToShow = new List<Adult>();
 
-    private int? filterById = null;
+    private int? filterById;
     private string filterByFirstName = "";
 
+    
     protected override async Task OnInitializedAsync()
     {
         allAdults = await DataApiService.GetAllAdultsAsync();
@@ -127,7 +128,7 @@ else
 
     private void FilterByFirstName(ChangeEventArgs changeEventArgs)
     {
-        filterByFirstName = null;
+        filterByFirstName = "";
         try
         {
             filterByFirstName = changeEventArgs.Value.ToString();
@@ -148,7 +149,7 @@ else
             ).ToList();
     }
 
-    private async Task DeleteAdult(int id)
+    private async Task DeleteAdultAsync(int id)
     {
         await DataApiService.DeleteAdultAsync(id);
 
