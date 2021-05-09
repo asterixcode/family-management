@@ -26,8 +26,6 @@ namespace Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-            //services.AddScoped<IDataApiService, DataApiService>();
-            //services.AddScoped<IUserService, UserService>();
             
             //http dependency injection for userService
             services.AddHttpClient<IUserService, UserService>(client =>

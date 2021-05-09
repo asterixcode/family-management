@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI.DataAccess;
 using WebAPI.Models;
 
-namespace WebAPI.Repo
+namespace WebAPI.Persistence
 {
     public class AdultRepo : IAdultRepo
     {
@@ -30,10 +30,8 @@ namespace WebAPI.Repo
         public async Task AddAdultAsync(Adult adult)
         {
             await using var familyDbContext = new FamilyDbContext();
-            Job job = new Job();
-            job = await familyDbContext.Jobs.FirstOrDefaultAsync(j => job.Id == adult.JobTitle.Id);
-            adult.JobTitle = job;
 
+            await familyDbContext.Jobs.AddAsync(adult.JobTitle);
             await familyDbContext.Adults.AddAsync(adult);
             await familyDbContext.SaveChangesAsync();
         }
@@ -50,10 +48,14 @@ namespace WebAPI.Repo
 
         public async Task DeleteAdultAsync(int id)
         {
-            using (FamilyDbContext familyDbContext = new FamilyDbContext())
+            using (var familyDbContext = new FamilyDbContext())
             {
-                Adult remove = await GetAdultByIdAsync(id);
-                familyDbContext.Adults.Remove(remove);
+                Adult toDelete = await familyDbContext.Adults.Where(a => a.Id == id)
+                    .Include(a => a.JobTitle).FirstAsync();
+
+                familyDbContext.Jobs.Remove(toDelete.JobTitle);
+                familyDbContext.Adults.Remove(toDelete);
+                
                 await familyDbContext.SaveChangesAsync();
             }
         }

@@ -6,7 +6,6 @@ namespace Blazor.Services
     public interface IUserService
     {
         Task<User> ValidateUserAsync(string username, string password);
-        Task RegisterUser(User user);
-        int GetUserId(string username);
+        Task RegisterUserAsync(User user);
     }
 }

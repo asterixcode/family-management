@@ -9,7 +9,7 @@
 <h3>Register</h3>
 <br/>
 
-<EditForm Model="@userToRegister" OnValidSubmit="@CreateUser">
+<EditForm Model="@userToRegister" OnValidSubmit="@CreateUserAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
@@ -33,12 +33,12 @@
     private string message = "";
 
     
-    private async Task CreateUser()
+    private async Task CreateUserAsync()
     {
         message = "";
         try
         {
-            await UserService.RegisterUser(userToRegister);
+            await UserService.RegisterUserAsync(userToRegister);
             message = "Congrats! You have been register to the system. You can Login now.";
         }
         catch (Exception e)

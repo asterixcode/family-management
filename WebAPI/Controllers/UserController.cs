@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
-using WebAPI.Repo;
+using WebAPI.Persistence;
 
 namespace WebAPI.Controllers
 {
