@@ -43,7 +43,7 @@ namespace Blazor.Auth
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public async Task ValidateLogin(string username, string password)
+        public async Task ValidateLoginAsync(string username, string password)
         {
             Console.WriteLine("Validating log in");
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
@@ -67,7 +67,7 @@ namespace Blazor.Auth
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
-        public async Task Logout()
+        public async Task LogoutAsync()
         {
             cachedUser = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());

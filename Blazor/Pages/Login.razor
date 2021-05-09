@@ -19,13 +19,13 @@
             <label>Password</label>
             <input type="password" placeholder="password" @bind-value="password"/>
         </div>
-        <button @onclick="PerformLogin" class="btn-dark">LOGIN</button>
+        <button @onclick="PerformLoginAsync" class="btn-dark">LOGIN</button>
         <div style="color:red">@errorMessage</div>
     </NotAuthorized>
     
     <Authorized>
         <h5> Hello @context.User.Identity.Name! </h5>
-        <button @onclick="PerformLogout" class="btn-dark">
+        <button @onclick="PerformLogoutAsync" class="btn-dark">
             LOGOUT
         </button>
     </Authorized>
@@ -38,12 +38,12 @@
     private string password;
     private string errorMessage;
 
-    public async Task PerformLogin()
+    public async Task PerformLoginAsync()
     {
         errorMessage = "";
         try
         {
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLoginAsync(username, password);
             username = "";
             password = "";
             NavigationManager.NavigateTo("/");
@@ -54,14 +54,14 @@
         }
     }
 
-    public async Task PerformLogout()
+    public async Task PerformLogoutAsync()
     {
         errorMessage = "";
         username = "";
         password = "";
         try
         {
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).LogoutAsync();
             NavigationManager.NavigateTo("/");
         }
         catch (Exception e)

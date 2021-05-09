@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
-namespace WebAPI.Repo
+namespace WebAPI.Persistence
 {
     public interface IJobRepo
     {

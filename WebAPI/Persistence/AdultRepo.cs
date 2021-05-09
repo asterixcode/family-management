@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI.DataAccess;
 using WebAPI.Models;
 
-namespace WebAPI.Repo
+namespace WebAPI.Persistence
 {
     public class AdultRepo : IAdultRepo
     {

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
-using WebAPI.Repo;
+using WebAPI.Persistence;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class JobsController : ControllerBase
+    public class JobsController : ControllerBase, IJobsController
     {
         private readonly IJobRepo _jobRepo;
 

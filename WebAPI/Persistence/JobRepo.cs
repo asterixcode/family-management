@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebAPI.DataAccess;
 using WebAPI.Models;
 
-namespace WebAPI.Repo
+namespace WebAPI.Persistence
 {
     public class JobRepo : IJobRepo
     {

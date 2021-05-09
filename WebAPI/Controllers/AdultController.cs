@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
-using WebAPI.Repo;
+using WebAPI.Persistence;
 
 namespace WebAPI.Controllers
 {
@@ -81,7 +81,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<Adult>> DeleteAdultAsync([FromRoute] int id)
+        public async Task<ActionResult> DeleteAdultAsync([FromRoute] int id)
         {
             try
             {
