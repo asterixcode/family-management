@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Data;
 using WebAPI.Models;
+using WebAPI.Repo;
 
 namespace WebAPI.Controllers
 {
@@ -11,11 +11,11 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class JobsController : ControllerBase
     {
-        private readonly IFileContextAdapter _fileContextAdapter;
+        private readonly IJobRepo _jobRepo;
 
-        public JobsController(IFileContextAdapter fileContextAdapter)
+        public JobsController(IJobRepo jobRepo)
         {
-            _fileContextAdapter = fileContextAdapter;
+            _jobRepo = jobRepo;
         }
 
         [HttpGet]
@@ -23,11 +23,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IList<Job> jobs = await _fileContextAdapter.GetAllJobsAsync();
-                foreach (var job in jobs)
-                {
-                    Console.WriteLine(job.JobTitle);
-                }
+                IList<Job> jobs = await _jobRepo.GetAllJobsAsync(); 
                 return Ok(jobs);
             }
             catch (Exception e)

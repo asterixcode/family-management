@@ -14,4 +14,24 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Data\**" />
+      <Compile Remove="Repository\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Data\**" />
+      <EmbeddedResource Remove="Repository\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Data\**" />
+      <None Remove="Repository\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Data\**" />
+      <Content Remove="Repository\**" />
+    </ItemGroup>
+
 </Project>

@@ -21,31 +21,29 @@
         <input type="password" placeholder="password" @bind-value="userToRegister.Password"/>
     </div>
     <button class="btn-dark" type="submit"> REGISTER </button>
-    
+    <br/>
+    <div style="color:red">@message</div>
 </EditForm>
 
-<br/>
-<div style="color:green">@successMessage</div>
-<div style="color:red">@errorMessage</div>
+
 
 
 @code {
     private User userToRegister = new User();
-    private string errorMessage;
-    private string successMessage;
+    private string message = "";
 
     
     private async Task CreateUser()
     {
-        errorMessage = "";
+        message = "";
         try
         {
             await UserService.RegisterUser(userToRegister);
-            successMessage = "Congrats! You have been register to the system. You can Login now.";
+            message = "Congrats! You have been register to the system. You can Login now.";
         }
         catch (Exception e)
         {
-            errorMessage = e.Message;
+            message = e.Message;
         }
     }
 

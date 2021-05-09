@@ -24,7 +24,6 @@ else
 {
     <EditForm Model="@adultToEdit" OnValidSubmit="@Save">
         <DataAnnotationsValidator/> <ValidationSummary/>
-        <div class="form-group"> Adult Id:<br/><InputText readonly @Id/> </div>
         <div class="form-group"> First Name:<br/> <InputText @bind-Value="adultToEdit.FirstName"/> </div>
         <div class="form-group"> Last Name:<br/> <InputText @bind-Value="adultToEdit.LastName"/></div>
         <div class="form-group"> Hair Color:<br/> <InputText @bind-Value="adultToEdit.HairColor"/></div>
@@ -56,7 +55,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private Adult adultToEdit;
+    private Adult adultToEdit = new Adult();
     private Job editJob = new Job();
 
     protected override async Task OnInitializedAsync()
