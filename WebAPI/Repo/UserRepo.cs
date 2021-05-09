@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI.DataAccess;
 using WebAPI.Models;
 
-namespace WebAPI.Repository
+namespace WebAPI.Repo
 {
     public class UserRepo : IUserRepo
     {
