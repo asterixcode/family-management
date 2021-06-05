@@ -53,7 +53,6 @@ namespace WebAPI.Persistence
                 Adult toDelete = await familyDbContext.Adults.Where(a => a.Id == id)
                     .Include(a => a.JobTitle).FirstAsync();
 
-                familyDbContext.Jobs.Remove(toDelete.JobTitle);
                 familyDbContext.Adults.Remove(toDelete);
                 
                 await familyDbContext.SaveChangesAsync();
